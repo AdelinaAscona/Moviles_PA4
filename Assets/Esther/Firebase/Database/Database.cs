@@ -210,6 +210,49 @@ public class Database : MonoBehaviour
         });
     }
 
+    public void SetPiecesData(List<int> pieces)
+    {
+        DatabaseReference piecesReference = dataReference.Child("users").Child(userID).Child("pieces");
+
+        piecesReference.SetValueAsync(pieces).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("Piezas registradas exitosamente");
+            }
+            else
+            {
+                Debug.Log("Error al registrar las piezas");
+            }
+        });
+    }
+
+    public void GetPiecesData(Action<List<int>> onListPieces, string userID)
+    {
+        DatabaseReference piecesReference = dataReference.Child("users").Child(userID).Child("pieces");
+
+        piecesReference.GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+
+                if (snapshot != null && snapshot.HasChildren)
+                {
+                    List<int> topScores = new List<int>();
+
+                    foreach (var childSnapshot in snapshot.Children)
+                    {
+                        int score = int.Parse(childSnapshot.Value.ToString());
+                        topScores.Add(score);
+                    }
+
+                    onListPieces?.Invoke(topScores);
+                }
+            }
+        });
+    }
+
     public void GetUserInfo()
     {
         StartCoroutine(GetFirstName(PrintData));

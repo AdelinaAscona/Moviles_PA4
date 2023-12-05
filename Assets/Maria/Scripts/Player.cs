@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private GameObject[] pieces;
-    [SerializeField] private Button[] piecesButton;
+    public GameObject[] player1;
 
-    [SerializeField] private int piecesCount;
+    public GameObject[] player2;
+    public GameObject[] player3;
+
+    public Button[] piecesButton;
+
+    public int piecesCount;
+    public List<int> piecesList;
 
     private void Start()
     {
@@ -17,11 +22,12 @@ public class Player : MonoBehaviour
 
     public void OnClick_CkechingPieces()
     {
-        for (int i = 0; i < pieces.Length; i++)
+        for (int i = 0; i < player1.Length; i++)
         {
-            if (pieces[i].activeSelf)
+            if (player1[i].activeSelf)
             {
                 piecesCount++;
+                piecesList.Add(i);
                 Debug.Log("Pieza N°" + i + " - Activada");
             }
             else
@@ -39,16 +45,6 @@ public class Player : MonoBehaviour
             {
                 piecesButton[i].interactable = false;
             }
-        }
-    }
-
-    public void OnClick_Reset()
-    {
-        for (int i = 0; i < piecesButton.Length; i++)
-        {
-            piecesCount = 0;
-            pieces[i].SetActive(false);
-            piecesButton[i].interactable = true;
         }
     }
 }
