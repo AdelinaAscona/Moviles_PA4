@@ -17,11 +17,13 @@ public class Database : MonoBehaviour
     {
         //userID = SystemInfo.deviceUniqueIdentifier;
         userID = user.codeID.ToString();
+
+        dataReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
     void Start()
     {
-        dataReference = FirebaseDatabase.DefaultInstance.RootReference;
+        //dataReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
     private void Update()
@@ -254,33 +256,36 @@ public class Database : MonoBehaviour
         });
     }
 
-    public List<int> GetPiecesData(string userID)
+    public IEnumerator GetPiecesData(string userID, Action<List<int>> onComplete)
     {
         DatabaseReference piecesReference = dataReference.Child("users").Child(userID).Child("pieces");
 
         var task = piecesReference.GetValueAsync();
-        task.Wait();
 
-        if (task.IsCompleted)
+        yield return new WaitUntil(() => task.IsCompleted);
+
+        if (task.Exception != null)
         {
-            DataSnapshot snapshot = task.Result;
+            Debug.LogError("Error obteniendo datos de piezas: " + task.Exception);
+            yield break;
+        }
 
-            if (snapshot != null && snapshot.HasChildren)
+        DataSnapshot snapshot = task.Result;
+
+        List<int> piecesList = new List<int>();
+
+        if (snapshot != null && snapshot.HasChildren)
+        {
+            foreach (var childSnapshot in snapshot.Children)
             {
-                List<int> piecesList = new List<int>();
-
-                foreach (var childSnapshot in snapshot.Children)
-                {
-                    int pieceValue = int.Parse(childSnapshot.Value.ToString());
-                    piecesList.Add(pieceValue);
-                }
-
-                return piecesList;
+                int pieceValue = int.Parse(childSnapshot.Value.ToString());
+                piecesList.Add(pieceValue);
             }
         }
 
-        return new List<int>();
+        onComplete?.Invoke(piecesList);
     }
+
 
     public void ResetPiecesData()
     {
@@ -299,31 +304,30 @@ public class Database : MonoBehaviour
         });
     }
 
-
-    public IEnumerator GetCodesID(Action<List<int>> onCodeID)
+    public IEnumerator GetLastThreeUsers(Action<List<User>> onLastThreeUsers)
     {
-        var codeReference = dataReference.Child("users").GetValueAsync();
-        yield return new WaitUntil(() => codeReference.IsCompleted);
+        var usersReference = dataReference.Child("users").OrderByKey().LimitToLast(3).GetValueAsync();
+        yield return new WaitUntil(() => usersReference.IsCompleted);
 
-        if (codeReference.Exception != null)
+        if (usersReference.Exception != null)
         {
-            Debug.LogError("Error: " + codeReference.Exception);
+            Debug.LogError("Error: " + usersReference.Exception);
             yield break;
         }
 
-        DataSnapshot snapshot = codeReference.Result;
+        DataSnapshot snapshot = usersReference.Result;
 
         if (snapshot != null && snapshot.HasChildren)
         {
-            List<int> codesID = new List<int>();
+            List<User> lastThreeUsers = new List<User>();
 
             foreach (var childSnapshot in snapshot.Children)
             {
-                int code = int.Parse(childSnapshot.Child("codeID").Value.ToString());
-                codesID.Add(code);
+                User user = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
+                lastThreeUsers.Add(user);
             }
 
-            onCodeID?.Invoke(codesID);
+            onLastThreeUsers?.Invoke(lastThreeUsers);
         }
         else
         {
@@ -331,6 +335,22 @@ public class Database : MonoBehaviour
         }
     }
 
+    public void SetReadyPlayer(bool ready)
+    {
+        DatabaseReference piecesReference = dataReference.Child("users").Child(userID).Child("ready");
+
+        piecesReference.SetValueAsync(ready).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("Envio registrado exitosamente");
+            }
+            else
+            {
+                Debug.Log("Error al enviar confirmación");
+            }
+        });
+    }
 
     public void GetUserInfo()
     {
@@ -358,6 +378,7 @@ public struct User
     public string email;
     public string password;
     public int codeID;
+
     public User(string email, string password, int codeID)
     {
         this.codeID = codeID;
