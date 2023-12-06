@@ -7,7 +7,7 @@ public class DetectorController : MonoBehaviour
     [SerializeField] private ScoreSO score;
     public SpriteRenderer spriteRenderer;
 
-    private int[] count;
+    public int[] count;
 
     private void Start()
     {

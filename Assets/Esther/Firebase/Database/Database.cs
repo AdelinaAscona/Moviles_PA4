@@ -335,11 +335,11 @@ public class Database : MonoBehaviour
         }
     }
 
-    public void SetReadyPlayer(bool ready)
+    public void SetScoreData(int score)
     {
-        DatabaseReference piecesReference = dataReference.Child("users").Child(userID).Child("ready");
+        DatabaseReference piecesReference = dataReference.Child("users").Child(userID).Child("score");
 
-        piecesReference.SetValueAsync(ready).ContinueWith(task =>
+        piecesReference.SetValueAsync(score).ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
@@ -351,6 +351,35 @@ public class Database : MonoBehaviour
             }
         });
     }
+
+    public IEnumerator GetScoreData(string userID, Action<int> onScoreDataLoaded)
+    {
+        DatabaseReference scoreReference = dataReference.Child("users").Child(userID).Child("score");
+
+        var task = scoreReference.GetValueAsync();
+
+        yield return new WaitUntil(() => task.IsCompleted);
+
+        if (task.IsCompleted)
+        {
+            DataSnapshot snapshot = task.Result;
+
+            if (snapshot != null && snapshot.Exists)
+            {
+                int score = int.Parse(snapshot.Value.ToString());
+                onScoreDataLoaded?.Invoke(score);
+            }
+            else
+            {
+                onScoreDataLoaded?.Invoke(0);
+            }
+        }
+        else
+        {
+            Debug.Log("Error al cargar el puntaje");
+        }
+    }
+
 
     public void GetUserInfo()
     {

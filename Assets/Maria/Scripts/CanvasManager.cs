@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class CanvasManager : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private Database database;
+
     [SerializeField] private TextMeshProUGUI[] playersNickName;
     [SerializeField] private TextMeshProUGUI[] playersScore;
 
@@ -28,13 +31,21 @@ public class CanvasManager : MonoBehaviour
         }
     }
 
-    //private void UpdatePlayersScore()
-    //{
-    //    for (int i = 0; i < playersScore.Length; i++)
-    //    {
-    //        playersScore[i].text = userName;
-    //    }
-    //}
+    public void UpdatePlayersScore()
+    {
+        for (int i = 0; i < playersScore.Length; i++)
+        {
+            int playerIndex = i;
+            StartCoroutine(GetAndSetPlayersScore(gameManager.playerData[i].codeID.ToString(), score => {
+                playersScore[playerIndex].text = score.ToString();
+            }));
+        }
+    }
+
+    private IEnumerator GetAndSetPlayersScore(string userID, Action<int> onComplete)
+    {
+        yield return database.GetScoreData(userID, onComplete);
+    }
 
     private void ResetPlayersScore()
     {

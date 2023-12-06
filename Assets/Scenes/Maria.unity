@@ -268,6 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 11400000, guid: 4643cff616c608c48a654c37877fe10f, type: 2}
   spriteRenderer: {fileID: 0}
+  count: 
 --- !u!1 &107799888
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,6 +930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 11400000, guid: 4643cff616c608c48a654c37877fe10f, type: 2}
   spriteRenderer: {fileID: 0}
+  count: 
 --- !u!1 &252759312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,6 +1426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 357432817}
+  database: {fileID: 642278924}
   playersNickName:
   - {fileID: 252759314}
   - {fileID: 1500987465}
@@ -1501,15 +1504,16 @@ MonoBehaviour:
   player: {fileID: 1410898615}
   database: {fileID: 642278924}
   score: {fileID: 11400000, guid: 4643cff616c608c48a654c37877fe10f, type: 2}
+  canvasManager: {fileID: 307714343}
   detectors:
-  - {fileID: 184929006}
-  - {fileID: 1948700323}
-  - {fileID: 560543435}
-  - {fileID: 903846624}
-  - {fileID: 439139855}
-  - {fileID: 779054771}
-  - {fileID: 107104280}
-  - {fileID: 1010983873}
+  - {fileID: 184929010}
+  - {fileID: 1948700327}
+  - {fileID: 560543439}
+  - {fileID: 903846628}
+  - {fileID: 439139859}
+  - {fileID: 779054775}
+  - {fileID: 107104284}
+  - {fileID: 1010983877}
   playerData: []
   player1: 
   player2: 
@@ -1713,6 +1717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 11400000, guid: 4643cff616c608c48a654c37877fe10f, type: 2}
   spriteRenderer: {fileID: 0}
+  count: 
 --- !u!1 &439845091
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,6 +2771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 11400000, guid: 4643cff616c608c48a654c37877fe10f, type: 2}
   spriteRenderer: {fileID: 0}
+  count: 
 --- !u!1 &638374741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,6 +3280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 11400000, guid: 4643cff616c608c48a654c37877fe10f, type: 2}
   spriteRenderer: {fileID: 0}
+  count: 
 --- !u!1 &805527979
 GameObject:
   m_ObjectHideFlags: 0
@@ -4014,6 +4021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 11400000, guid: 4643cff616c608c48a654c37877fe10f, type: 2}
   spriteRenderer: {fileID: 0}
+  count: 
 --- !u!1 &906871004
 GameObject:
   m_ObjectHideFlags: 0
@@ -4640,6 +4648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 11400000, guid: 4643cff616c608c48a654c37877fe10f, type: 2}
   spriteRenderer: {fileID: 0}
+  count: 
 --- !u!1 &1011485706
 GameObject:
   m_ObjectHideFlags: 0
@@ -9824,6 +9833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 11400000, guid: 4643cff616c608c48a654c37877fe10f, type: 2}
   spriteRenderer: {fileID: 0}
+  count: 
 --- !u!1 &2023576721
 GameObject:
   m_ObjectHideFlags: 0
@@ -10293,8 +10303,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 514992120}
   - {fileID: 2111279876}
-  - {fileID: 421902932}
   - {fileID: 351004677}
+  - {fileID: 421902932}
   - {fileID: 2024692177}
   - {fileID: 956622934}
   - {fileID: 1854677815}

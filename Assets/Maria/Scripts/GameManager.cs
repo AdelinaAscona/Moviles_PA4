@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Database database;
     [SerializeField] private ScoreSO score;
+    [SerializeField] private CanvasManager canvasManager;
 
-    [SerializeField] private GameObject[] detectors;
+    [SerializeField] private DetectorController[] detectors;
 
     public List<User> playerData;
     public List<int> player1;
@@ -31,13 +32,17 @@ public class GameManager : MonoBehaviour
         sendButton.interactable = true;
         resetButton.interactable = true;
 
+        startButton.interactable = false;
+        playAgainButton.interactable = true;
+
         StartCoroutine(database.GetLastThreeUsers(UpdateLastThreeUsers));
     }
 
     private void Update()
     {
         UpdatePiecesData();
-        //database.CheckAllPlayersReady(ActivePlayerPieces);
+        database.SetScoreData(score.score);
+        canvasManager.UpdatePlayersScore();
     }
 
     public void OnClick_SendData()
@@ -47,6 +52,7 @@ public class GameManager : MonoBehaviour
 
         sendButton.interactable = false;
         resetButton.interactable = false;
+        startButton.interactable = true;
 
         Debug.Log("Datos Enviados");
     }
@@ -71,6 +77,9 @@ public class GameManager : MonoBehaviour
 
         startButton.gameObject.SetActive(false);
         playAgainButton.gameObject.SetActive(true);
+
+        //database.SetScoreData(score.score);
+        //canvasManager.UpdatePlayersScore();
     }
 
     public void OnClick_PlayAgain()
@@ -78,9 +87,13 @@ public class GameManager : MonoBehaviour
         ActiveDetectors(false);
         //database.SetReadyPlayer(false);
         database.ResetPiecesData();
+        player.piecesList.Clear();
 
         sendButton.interactable = true;
         resetButton.interactable = true;
+
+        startButton.interactable = false;
+        playAgainButton.interactable = true;
 
         player.piecesCount = 0;
 
@@ -91,6 +104,11 @@ public class GameManager : MonoBehaviour
             player.player3[i].SetActive(false);
 
             player.piecesButton[i].interactable = true;
+        }
+
+        for (int i = 0; i < detectors.Length; i++)
+        { 
+            detectors[i].count = new int[3];
         }
 
         score.ResetScore();
@@ -127,7 +145,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < detectors.Length; i++)
         {
-            detectors[i].SetActive(active);
+            detectors[i].gameObject.SetActive(active);
         }
     }
 
@@ -135,7 +153,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < detectors.Length; i++)
         {
-            detectors[i].SetActive(true);
+            detectors[i].gameObject.SetActive(true);
         }
     }
 
