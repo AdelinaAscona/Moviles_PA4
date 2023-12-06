@@ -498,6 +498,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1410898615}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnClick_CkechingPieces
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 357432817}
         m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
         m_MethodName: OnClick_SendData
@@ -591,7 +603,7 @@ GameObject:
   - component: {fileID: 357432818}
   - component: {fileID: 357432817}
   m_Layer: 0
-  m_Name: CanvasManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -609,8 +621,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb38c738db153e46b788ec9690b7f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sendButton: {fileID: 300098475}
+  resetButton: {fileID: 507654233}
   player: {fileID: 1410898615}
   database: {fileID: 642278924}
+  playerID: 
 --- !u!4 &357432818
 Transform:
   m_ObjectHideFlags: 0
@@ -1312,7 +1327,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1410898615}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnClick_CkechingPieces
+        m_MethodName: OnClick_ActivePiece
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1540,7 +1555,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1410898615}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnClick_CkechingPieces
+        m_MethodName: OnClick_ActivePiece
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1633,9 +1648,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user:
-    email: 
-    password: 
-    codeID: 0
+    email: prueba@test.com
+    password: 12355648
+    codeID: 100
 --- !u!1 &805527979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,7 +2027,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1410898615}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnClick_CkechingPieces
+        m_MethodName: OnClick_ActivePiece
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2527,7 +2542,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1410898615}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnClick_CkechingPieces
+        m_MethodName: OnClick_ActivePiece
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3783,7 +3798,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1410898615}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnClick_CkechingPieces
+        m_MethodName: OnClick_ActivePiece
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4471,7 +4486,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1410898615}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnClick_CkechingPieces
+        m_MethodName: OnClick_ActivePiece
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4739,7 +4754,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1410898615}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnClick_CkechingPieces
+        m_MethodName: OnClick_ActivePiece
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4883,7 +4898,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1410898615}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnClick_CkechingPieces
+        m_MethodName: OnClick_ActivePiece
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5143,7 +5158,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1410898615}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnClick_CkechingPieces
+        m_MethodName: OnClick_ActivePiece
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5313,8 +5328,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 514992120}
   - {fileID: 2111279876}
-  - {fileID: 2024692177}
   - {fileID: 351004677}
+  - {fileID: 2024692177}
   - {fileID: 956622934}
   - {fileID: 1854677815}
   - {fileID: 1915113616}

@@ -9,14 +9,14 @@ public class Database : MonoBehaviour
 {
     //public RegisterManager register;
 
-    [SerializeField]
-    private User user;
+    [SerializeField] private User user;
     private DatabaseReference dataReference;
     private string userID;
 
     private void Awake()
     {
-        userID = SystemInfo.deviceUniqueIdentifier;
+        //userID = SystemInfo.deviceUniqueIdentifier;
+        userID = user.codeID.ToString();
     }
 
     void Start()
@@ -24,10 +24,37 @@ public class Database : MonoBehaviour
         dataReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CreateUser();
+        }
+    }
+
     public void CreateUser(string email, string password)
     {
         int codeID = UnityEngine.Random.Range(0, 99999);
         user = new User(email, password, codeID);
+
+        string json = JsonUtility.ToJson(user);
+        dataReference.Child("users").Child(userID).SetRawJsonValueAsync(json).ContinueWith(
+            task =>
+            {
+                if (task.IsCompleted)
+                {
+                    Debug.Log("Done Update");
+                }
+                else
+                {
+                    Debug.Log("Failed Attempt");
+                }
+            });
+    }
+
+    public void CreateUser() //Prueba
+    {
+        int codeID = UnityEngine.Random.Range(0, 99999);
 
         string json = JsonUtility.ToJson(user);
         dataReference.Child("users").Child(userID).SetRawJsonValueAsync(json).ContinueWith(
@@ -227,31 +254,83 @@ public class Database : MonoBehaviour
         });
     }
 
-    public void GetPiecesData(Action<List<int>> onListPieces, string userID)
+    public List<int> GetPiecesData(string userID)
     {
         DatabaseReference piecesReference = dataReference.Child("users").Child(userID).Child("pieces");
 
-        piecesReference.GetValueAsync().ContinueWith(task =>
+        var task = piecesReference.GetValueAsync();
+        task.Wait();
+
+        if (task.IsCompleted)
+        {
+            DataSnapshot snapshot = task.Result;
+
+            if (snapshot != null && snapshot.HasChildren)
+            {
+                List<int> piecesList = new List<int>();
+
+                foreach (var childSnapshot in snapshot.Children)
+                {
+                    int pieceValue = int.Parse(childSnapshot.Value.ToString());
+                    piecesList.Add(pieceValue);
+                }
+
+                return piecesList;
+            }
+        }
+
+        return new List<int>();
+    }
+
+    public void ResetPiecesData()
+    {
+        DatabaseReference piecesReference = dataReference.Child("users").Child(userID).Child("pieces");
+
+        piecesReference.RemoveValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
-                DataSnapshot snapshot = task.Result;
-
-                if (snapshot != null && snapshot.HasChildren)
-                {
-                    List<int> topScores = new List<int>();
-
-                    foreach (var childSnapshot in snapshot.Children)
-                    {
-                        int score = int.Parse(childSnapshot.Value.ToString());
-                        topScores.Add(score);
-                    }
-
-                    onListPieces?.Invoke(topScores);
-                }
+                Debug.Log("Datos de piezas reseteados exitosamente");
+            }
+            else
+            {
+                Debug.Log("Error al resetear los datos de piezas");
             }
         });
     }
+
+
+    public IEnumerator GetCodesID(Action<List<int>> onCodeID)
+    {
+        var codeReference = dataReference.Child("users").GetValueAsync();
+        yield return new WaitUntil(() => codeReference.IsCompleted);
+
+        if (codeReference.Exception != null)
+        {
+            Debug.LogError("Error: " + codeReference.Exception);
+            yield break;
+        }
+
+        DataSnapshot snapshot = codeReference.Result;
+
+        if (snapshot != null && snapshot.HasChildren)
+        {
+            List<int> codesID = new List<int>();
+
+            foreach (var childSnapshot in snapshot.Children)
+            {
+                int code = int.Parse(childSnapshot.Child("codeID").Value.ToString());
+                codesID.Add(code);
+            }
+
+            onCodeID?.Invoke(codesID);
+        }
+        else
+        {
+            Debug.Log("No se encontraron usuarios");
+        }
+    }
+
 
     public void GetUserInfo()
     {

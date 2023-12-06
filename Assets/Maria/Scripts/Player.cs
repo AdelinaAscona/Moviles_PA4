@@ -20,21 +20,29 @@ public class Player : MonoBehaviour
         piecesCount = 0;
     }
 
-    public void OnClick_CkechingPieces()
+    public void OnClick_ActivePiece()
     {
         for (int i = 0; i < player1.Length; i++)
         {
             if (player1[i].activeSelf)
             {
                 piecesCount++;
-                piecesList.Add(i);
-                Debug.Log("Pieza N°" + i + " - Activada");
             }
-            else
-                Debug.Log("Pieza N°" + i + " - Desactivada");
         }
 
         DesactiveButton();
+    }
+
+    public void OnClick_CkechingPieces()
+    {
+        for (int i = 0; i < player1.Length; i++)
+        {
+            if (player1[i].activeSelf)
+            {
+                piecesList.Add(i);
+                Debug.Log("Pieza N°" + i + " - Activada");
+            }
+        }
     }
 
     private void DesactiveButton()
