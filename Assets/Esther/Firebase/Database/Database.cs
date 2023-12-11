@@ -5,7 +5,7 @@ using Firebase;
 using Firebase.Database;
 using Firebase.Auth;
 using System;
-
+using TMPro;
 public class Database : MonoBehaviour
 {
     //public RegisterManager register;
@@ -245,24 +245,47 @@ public class Database : MonoBehaviour
     //    }
 
     public static Database Instance;
+
+    //Registration Variables
+    [Space]
+    [Header("Add UserList")]
+    public TextMeshProUGUI userRegisterField;
     // Base de Datos Firebase
     DatabaseReference reference;
+
+    FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+
+
+    private string userId;
 
     void Start()
     {
         // Obtiene una referencia a la base de datos
         reference = FirebaseDatabase.DefaultInstance.RootReference;
+
+       
+        if (auth.CurrentUser != null)
+        {
+            // El usuario está autenticado, obtén su UID
+            userId = auth.CurrentUser.UserId;
+        }
+        else
+        {
+            Debug.LogWarning("El usuario no está autenticado.");
+        }
+        //// Obtiene el UID del usuario actualmente autenticado
+        //userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+
     }
 
-    public void ChangeUsername(string newUsername)
+    public void AddUsername()
     {
-        // Obtiene el UID del usuario actualmente autenticado
-        string userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-
+        string newUsername = userRegisterField.text; 
         // Actualiza el nombre de usuario en la base de datos
         reference.Child("usuarios").Child(userId).Child("nombre").SetValueAsync(newUsername);
-
-
+             
+         Debug.Log("El nombre de usuario está vacío.");
+        
     }
 
 }

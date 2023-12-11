@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &16067415
 RectTransform:
   m_ObjectHideFlags: 0
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 69820418}
   - component: {fileID: 69820417}
   m_Layer: 5
-  m_Name: TextCorreo
+  m_Name: TextCorreo-L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 291011696}
   - component: {fileID: 291011695}
   m_Layer: 5
-  m_Name: TextPassword
+  m_Name: TextPassword2-R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -731,6 +731,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &341521103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 341521105}
+  - component: {fileID: 341521104}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &341521104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341521103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f3dfc3713d7a649886c5a0c3c9ca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &341521105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341521103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &433939570
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,9 +2288,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1474325582}
+      - m_Target: {fileID: 1587287646}
         m_TargetAssemblyTypeName: Authentification, Assembly-CSharp
         m_MethodName: Register
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1474325579}
+        m_TargetAssemblyTypeName: Database, Assembly-CSharp
+        m_MethodName: AddUsername
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2828,7 +2884,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1302461549
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3287,7 +3343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1474325578}
-  - component: {fileID: 1474325582}
+  - component: {fileID: 1474325579}
   m_Layer: 0
   m_Name: Database
   m_TagString: Untagged
@@ -3310,7 +3366,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1474325582
+--- !u!114 &1474325579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3319,16 +3375,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1474325577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 818a06fc1f663114db707e1f500a1371, type: 3}
+  m_Script: {fileID: 11500000, guid: 3272559e4b8a14240b93cdc7405b301b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependencyStatus: 0
-  emailLoginField: {fileID: 69820417}
-  passwordLoginField: {fileID: 2134298456}
-  nameRegisterField: {fileID: 1732168702}
-  emailRegisterField: {fileID: 1768181864}
-  passwordRegisterField: {fileID: 1621666412}
-  confirmPasswordRegisterField: {fileID: 291011695}
+  userRegisterField: {fileID: 1732168702}
 --- !u!1 &1509738970
 GameObject:
   m_ObjectHideFlags: 0
@@ -3823,6 +3873,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &1587287645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1587287647}
+  - component: {fileID: 1587287646}
+  m_Layer: 0
+  m_Name: Auth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1587287646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587287645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 818a06fc1f663114db707e1f500a1371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dependencyStatus: 0
+  emailLoginField: {fileID: 69820417}
+  passwordLoginField: {fileID: 2134298456}
+  nameRegisterField: {fileID: 1732168702}
+  emailRegisterField: {fileID: 1768181864}
+  passwordRegisterField: {fileID: 1621666412}
+  confirmPasswordRegisterField: {fileID: 291011695}
+--- !u!4 &1587287647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587287645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1587705935
 GameObject:
   m_ObjectHideFlags: 0
@@ -3906,7 +4007,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1474325582}
+      - m_Target: {fileID: 1587287646}
         m_TargetAssemblyTypeName: Authentification, Assembly-CSharp
         m_MethodName: Login
         m_Mode: 1
@@ -3968,7 +4069,7 @@ GameObject:
   - component: {fileID: 1621666413}
   - component: {fileID: 1621666412}
   m_Layer: 5
-  m_Name: TextPassword
+  m_Name: TextPassword-R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4931,7 +5032,7 @@ GameObject:
   - component: {fileID: 1732168701}
   - component: {fileID: 1732168702}
   m_Layer: 5
-  m_Name: TextName
+  m_Name: TextName-R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5117,7 +5218,7 @@ GameObject:
   - component: {fileID: 1768181865}
   - component: {fileID: 1768181864}
   m_Layer: 5
-  m_Name: TextCorreo
+  m_Name: TextCorreo-R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5892,7 +5993,7 @@ GameObject:
   - component: {fileID: 2134298457}
   - component: {fileID: 2134298456}
   m_Layer: 5
-  m_Name: TextPassword
+  m_Name: TextPassword-L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6176,4 +6277,6 @@ SceneRoots:
   - {fileID: 1509738973}
   - {fileID: 1909376669}
   - {fileID: 758170944}
+  - {fileID: 341521105}
+  - {fileID: 1587287647}
   - {fileID: 1474325578}
