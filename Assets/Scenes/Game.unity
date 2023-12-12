@@ -3118,6 +3118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3272559e4b8a14240b93cdc7405b301b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  email_text: {fileID: 0}
+  password_text: {fileID: 0}
   user:
     email: prueba@test.com
     password: 12355648

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "142407339151",
+    "firebase_url": "https://movilespa4-default-rtdb.firebaseio.com",
+    "project_id": "movilespa4",
+    "storage_bucket": "movilespa4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142407339151:android:acecc8e1887657837874fa",
+        "android_client_info": {
+          "package_name": "com.MovilesPA4.Firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAigI_QmLaZfRk34g8ZqZg_bH9UvNtggd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
