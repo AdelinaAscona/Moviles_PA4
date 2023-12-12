@@ -32,10 +32,7 @@ public class Database : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CreateUser();
-        }
+        
     }
 
     public void OnClick_UserData()
@@ -46,10 +43,8 @@ public class Database : MonoBehaviour
 
     public void CreateUser(string email, string password)
     {
-        //int codeID = UnityEngine.Random.Range(0, 99999);
-        int userParse;
-        int.TryParse(userID, out userParse);
-        user = new User(email, password, userParse);
+        int codeID = UnityEngine.Random.Range(0, 99999);
+        user = new User(email, password, codeID);
 
         string json = JsonUtility.ToJson(user);
         dataReference.Child("users").Child(userID).SetRawJsonValueAsync(json).ContinueWith(
