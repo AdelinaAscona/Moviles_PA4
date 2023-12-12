@@ -4,9 +4,13 @@ using UnityEngine;
 using Firebase;
 using Firebase.Database;
 using System;
+using TMPro;
 
 public class Database : MonoBehaviour
 {
+    public TextMeshProUGUI email_text;
+    public TextMeshProUGUI password_text;
+    
     //public RegisterManager register;
 
     [SerializeField] private User user;
@@ -15,8 +19,8 @@ public class Database : MonoBehaviour
 
     private void Awake()
     {
-        //userID = SystemInfo.deviceUniqueIdentifier;
-        userID = user.codeID.ToString();
+        userID = SystemInfo.deviceUniqueIdentifier;
+        //userID = user.codeID.ToString();
 
         dataReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
@@ -34,10 +38,18 @@ public class Database : MonoBehaviour
         }
     }
 
+    public void OnClick_UserData()
+    {
+      
+        CreateUser(email_text.text, password_text.text);
+    }
+
     public void CreateUser(string email, string password)
     {
-        int codeID = UnityEngine.Random.Range(0, 99999);
-        user = new User(email, password, codeID);
+        //int codeID = UnityEngine.Random.Range(0, 99999);
+        int userParse;
+        int.TryParse(userID, out userParse);
+        user = new User(email, password, userParse);
 
         string json = JsonUtility.ToJson(user);
         dataReference.Child("users").Child(userID).SetRawJsonValueAsync(json).ContinueWith(

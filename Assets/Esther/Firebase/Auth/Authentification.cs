@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 
 public class Authentification : MonoBehaviour
 {
+
     // Firebase variable
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -160,7 +161,7 @@ public class Authentification : MonoBehaviour
 
             Debug.LogFormat("{0} You Are Successfully Logged In", user.DisplayName);
 
-            SceneManager.LoadScene("SampleScene"); // OJITO
+            SceneManager.LoadScene("Game"); // OJITO
 
 
         }
@@ -226,51 +227,9 @@ public class Authentification : MonoBehaviour
                 Firebase.Auth.AuthResult authResult = registerTask.Result;
                 user = authResult.User;
 
-
-                //UserProfile userProfile = new UserProfile { DisplayName = name, PhotoUrl = new Uri(defaultProfileImage) };  //AQUIIIIIIIIIIIII :)   
-
-                //var updateProfileTask = user.UpdateUserProfileAsync(userProfile);
-
-                //yield return new WaitUntil(() => updateProfileTask.IsCompleted);
-
-                //if (updateProfileTask.Exception != null)
-                //{
-                //    // Delete the user if user update failed
-                //    user.DeleteAsync();
-
-                //    Debug.LogError(updateProfileTask.Exception);
-
-                //    FirebaseException firebaseException = updateProfileTask.Exception.GetBaseException() as FirebaseException;
-                //    AuthError authError = (AuthError)firebaseException.ErrorCode;
-
-
-                //    string failedMessage = "Profile update Failed! Becuase ";
-                //    switch (authError)
-                //    {
-                //        case AuthError.InvalidEmail:
-                //            failedMessage += "Email is invalid";
-                //            break;
-                //        case AuthError.WrongPassword:
-                //            failedMessage += "Wrong Password";
-                //            break;
-                //        case AuthError.MissingEmail:
-                //            failedMessage += "Email is missing";
-                //            break;
-                //        case AuthError.MissingPassword:
-                //            failedMessage += "Password is missing";
-                //            break;
-                //        default:
-                //            failedMessage = "Profile update Failed";
-                //            break;
-                //    }
-
-                ////    Debug.Log(failedMessage);
-                //}
-                //else
-                //{
+                
                     Debug.Log("Registration Sucessful Welcome " + user.DisplayName);
 
-                //}
             }
         }
     }
