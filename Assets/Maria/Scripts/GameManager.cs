@@ -123,9 +123,9 @@ public class GameManager : MonoBehaviour
 
     public void UpdatePiecesData()
     {
-        StartCoroutine(GetAndSetPiecesData(playerData[0].codeID.ToString(), pieces => { player1 = pieces; }));
-        StartCoroutine(GetAndSetPiecesData(playerData[1].codeID.ToString(), pieces => { player2 = pieces; }));
-        StartCoroutine(GetAndSetPiecesData(playerData[2].codeID.ToString(), pieces => { player3 = pieces; }));
+        StartCoroutine(GetAndSetPiecesData(playerData[0].codeID, pieces => { player1 = pieces; }));
+        StartCoroutine(GetAndSetPiecesData(playerData[1].codeID, pieces => { player2 = pieces; }));
+        StartCoroutine(GetAndSetPiecesData(playerData[2].codeID, pieces => { player3 = pieces; }));
     }
 
     private IEnumerator GetAndSetPiecesData(string userID, Action<List<int>> onComplete)

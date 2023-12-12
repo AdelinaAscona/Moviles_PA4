@@ -43,8 +43,8 @@ public class Database : MonoBehaviour
 
     public void CreateUser(string email, string password)
     {
-        int codeID = UnityEngine.Random.Range(0, 99999);
-        user = new User(email, password, codeID);
+        //int codeID = UnityEngine.Random.Range(0, 99999);
+        user = new User(email, password, userID);
 
         string json = JsonUtility.ToJson(user);
         dataReference.Child("users").Child(userID).SetRawJsonValueAsync(json).ContinueWith(
@@ -413,9 +413,9 @@ public struct User
 {
     public string email;
     public string password;
-    public int codeID;
+    public string codeID;
 
-    public User(string email, string password, int codeID)
+    public User(string email, string password, string codeID)
     {
         this.codeID = codeID;
         this.email = email;

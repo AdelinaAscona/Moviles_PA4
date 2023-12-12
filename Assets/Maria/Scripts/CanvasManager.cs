@@ -36,7 +36,7 @@ public class CanvasManager : MonoBehaviour
         for (int i = 0; i < playersScore.Length; i++)
         {
             int playerIndex = i;
-            StartCoroutine(GetAndSetPlayersScore(gameManager.playerData[i].codeID.ToString(), score => {
+            StartCoroutine(GetAndSetPlayersScore(gameManager.playerData[i].codeID, score => {
                 playersScore[playerIndex].text = score.ToString();
             }));
         }
